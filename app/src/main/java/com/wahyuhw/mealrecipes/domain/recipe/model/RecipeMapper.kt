@@ -5,10 +5,11 @@ import com.wahyuhw.mealrecipes.data.recipe.source.network.model.response.RecipeA
 import com.wahyuhw.mealrecipes.data.recipe.source.network.model.response.RecipeCategoryResponse
 import com.wahyuhw.mealrecipes.data.recipe.source.network.model.response.RecipeDetailResponse
 import com.wahyuhw.mealrecipes.data.recipe.source.network.model.response.RecipeItemResponse
+import com.wahyuhw.mealrecipes.utils.orZero
 
 fun RecipeDetailEntity.toDomain(): RecipeDetail {
 	return RecipeDetail(
-		idMeal = idMeal.orEmpty(),
+		idMeal = idMeal.orZero().toString(),
 		strMeal = strMeal.orEmpty(),
 		strDrinkAlternate = strDrinkAlternate.orEmpty(),
 		strCategory = strCategory.orEmpty(),
@@ -124,7 +125,7 @@ fun RecipeDetailResponse.toDomain(): RecipeDetail {
 
 fun RecipeDetail.toEntity(): RecipeDetailEntity {
 	return RecipeDetailEntity(
-		idMeal = idMeal,
+		idMeal = idMeal.toInt(),
 		strMeal = strMeal,
 		strDrinkAlternate = strDrinkAlternate,
 		strCategory = strCategory,

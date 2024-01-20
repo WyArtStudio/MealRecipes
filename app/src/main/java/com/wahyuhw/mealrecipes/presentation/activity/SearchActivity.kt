@@ -25,7 +25,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 	}
 	
 	private val recipeAdapter by lazy { RecipesAdapter { recipe ->
-		DetailRecipeActivity.start(this, data = recipe) }
+		DetailRecipeActivity.start(this, id = recipe.idMeal) }
 	}
 	private val viewModel: RecipeViewModel by inject()
 	private var query = emptyString()

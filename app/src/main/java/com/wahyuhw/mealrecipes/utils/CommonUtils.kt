@@ -211,3 +211,16 @@ fun TextView.setHtmlText(value: String) {
 		Html.fromHtml(value)
 	}
 }
+
+fun String.addParagraphs(): String {
+	val sentences = this.split(Regex("(?<!\\w\\.\\w.)(?<![A-Z][a-z]\\.)(?<=\\.|\\?)\\s"))
+	val paragraphs = mutableListOf<String>()
+	
+	for (i in sentences.indices step 4) {
+		val endIndex = minOf(i + 4, sentences.size)
+		val paragraph = sentences.subList(i, endIndex).joinToString(" ")
+		paragraphs.add(paragraph)
+	}
+	
+	return paragraphs.joinToString("\n\n")
+}

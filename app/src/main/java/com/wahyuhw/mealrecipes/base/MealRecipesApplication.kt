@@ -3,6 +3,11 @@ package com.wahyuhw.mealrecipes.base
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import com.jakewharton.threetenabp.AndroidThreeTen
+import com.wahyuhw.mealrecipes.di.dbModule
+import com.wahyuhw.mealrecipes.di.networkModule
+import com.wahyuhw.mealrecipes.di.repositoryModule
+import com.wahyuhw.mealrecipes.di.useCaseModule
+import com.wahyuhw.mealrecipes.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -24,5 +29,9 @@ class MealRecipesApplication: Application() {
 
 fun getModules(): List<Module> =
     listOf(
-    
+        networkModule,
+        repositoryModule,
+        useCaseModule,
+        viewModelModule,
+        dbModule
     )

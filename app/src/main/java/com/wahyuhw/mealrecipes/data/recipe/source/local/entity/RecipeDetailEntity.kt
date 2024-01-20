@@ -11,7 +11,7 @@ import kotlinx.parcelize.Parcelize
 data class RecipeDetailEntity(
 	@PrimaryKey
 	@ColumnInfo("idMeal")
-	val idMeal: String,
+	val idMeal: Int,
 	@ColumnInfo("strMeal")
 	val strMeal: String?,
 	@ColumnInfo("strDrinkAlternate")

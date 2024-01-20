@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="@dimen/dimen_30dp"
-    android:layout_marginTop="@dimen/dimen_30dp"
+    android:paddingTop="@dimen/dimen_30dp"
+    android:paddingHorizontal="@dimen/dimen_30dp"
     tools:context=".presentation.activity.DetailRecipeActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -38,7 +38,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imgBack"
         android:layout_marginTop="@dimen/dimen_12dp"
-        app:showFullScreenButton="true"
+        app:showFullScreenButton="false"
         app:showVideoCurrentTime="true"
         app:showVideoDuration="true"
         app:showSeekBar="true"
@@ -91,11 +91,15 @@
                 android:id="@+id/rvIngredient"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/dimen_32dp"
                 tools:listitem="@layout/item_ingredients"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvProcedures"
                 style="@style/MealRecipeText.SemiBold.14"
+                android:layout_marginBottom="@dimen/dimen_24dp"
                 android:layout_width="wrap_content"
                 android:textColor="@color/colorBaseBlack"/>
         </LinearLayout>

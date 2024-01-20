@@ -25,7 +25,7 @@ class SavedRecipesActivity : BaseActivity<ActivitySavedRecipesBinding>() {
 	}
 	
 	private val recipeAdapter by lazy { RecipesAdapter { recipe ->
-		DetailRecipeActivity.start(this, data = recipe) }
+		DetailRecipeActivity.start(this, id = recipe.idMeal) }
 	}
 	private var listRecipe = emptyList<RecipeDetail>()
 	private val viewModel: RecipeViewModel by inject()

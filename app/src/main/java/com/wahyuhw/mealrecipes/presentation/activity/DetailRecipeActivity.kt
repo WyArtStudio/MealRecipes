@@ -13,6 +13,7 @@ import com.wahyuhw.mealrecipes.presentation.adapter.RecipeIngredient
 import com.wahyuhw.mealrecipes.presentation.adapter.RecipeIngredientsAdapter
 import com.wahyuhw.mealrecipes.utils.EXTRA_ID
 import com.wahyuhw.mealrecipes.utils.EXTRA_RECIPE
+import com.wahyuhw.mealrecipes.utils.debug
 import com.wahyuhw.mealrecipes.utils.emptyString
 import com.wahyuhw.mealrecipes.utils.getCompatDrawable
 import com.wahyuhw.mealrecipes.utils.observe
@@ -24,10 +25,9 @@ import org.koin.android.ext.android.inject
 
 class DetailRecipeActivity : BaseActivity<ActivityDetailRecipeBinding>() {
 	companion object {
-		fun start(context: Context, id: String = emptyString(), data: RecipeDetail = RecipeDetail()) {
+		fun start(context: Context, id: String = emptyString()) {
 			val intent = Intent(context, DetailRecipeActivity::class.java)
 			intent.putExtra(EXTRA_ID, id)
-			intent.putExtra(EXTRA_RECIPE, data)
 			context.startActivity(intent)
 		}
 	}
@@ -44,12 +44,11 @@ class DetailRecipeActivity : BaseActivity<ActivityDetailRecipeBinding>() {
 	}
 	
 	override fun setupIntent() {
-		recipeDetail = intent.getParcelableExtra<RecipeDetail>(EXTRA_RECIPE).orDefault(RecipeDetail())
 		id = intent.getStringExtra(EXTRA_ID).orEmpty()
 	}
 	
 	override fun setupUI() {
-		if (id.isEmpty()) loadRecipe(recipeDetail)
+		binding.rvIngredient.adapter = recipeAdapter
 	}
 	
 	override fun setupAction() {
@@ -57,10 +56,8 @@ class DetailRecipeActivity : BaseActivity<ActivityDetailRecipeBinding>() {
 	}
 	
 	override fun setupProcess() {
-		if (id.isNotEmpty()) {
-			viewModel.getRecipeDetailById(id.toInt())
-			viewModel.getLocalRecipeDetailById(id.toInt())
-		}
+		viewModel.getRecipeDetailById(id.toInt())
+		viewModel.getLocalRecipeDetailById(id.toInt())
 	}
 	
 	override fun setupObserver() {
@@ -83,7 +80,7 @@ class DetailRecipeActivity : BaseActivity<ActivityDetailRecipeBinding>() {
 			onLoading = {},
 			onError = {},
 			onSuccess = {
-				setBookmark(it != null)
+				setBookmark(it.orDefault(RecipeDetail()).idMeal.isNotEmpty())
 				recipeDetail = it.orDefault(RecipeDetail())
 			}
 		)
@@ -93,6 +90,7 @@ class DetailRecipeActivity : BaseActivity<ActivityDetailRecipeBinding>() {
 				showLoading("Sedang menyimpan resep...")
 			},
 			onError = {
+				debug { "DB: $it" }
 				showErrorState("Error: $it")
 			},
 			onSuccess = {
@@ -129,7 +127,6 @@ class DetailRecipeActivity : BaseActivity<ActivityDetailRecipeBinding>() {
 	private fun loadRecipe(recipeDetail: RecipeDetail) = with(binding) {
 		viewModel.getLocalRecipeDetailById(recipeDetail.idMeal.toInt())
 		recipeDetail.apply {
-			for (i in 1..10)
 			if (strIngredient1.isNotEmpty()) listIngredient.add(
 				RecipeIngredient(ingredient = strIngredient1, pcs = strMeasure1)
 			)
@@ -169,14 +166,15 @@ class DetailRecipeActivity : BaseActivity<ActivityDetailRecipeBinding>() {
 			if (strIngredient10.isNotEmpty()) listIngredient.add(
 				RecipeIngredient(ingredient = strIngredient10, pcs = strMeasure10)
 			)
-			
+			debug { "List: $listIngredient" }
 			recipeAdapter.submitList(listIngredient)
+			
 			tvTitle.text = strMeal
 			tvAreaCategory.text = "$strArea ($strCategory)"
 			tvProcedures.setHtmlText(strInstructions)
 			videoPlayer.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
 				override fun onReady(youTubePlayer: YouTubePlayer) {
-					val videoId: String = strYoutube
+					val videoId: String = strYoutube.substringAfterLast('=')
 					youTubePlayer.cueVideo(videoId, 0f)
 				}
 			})
