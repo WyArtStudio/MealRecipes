@@ -3,6 +3,7 @@ package com.wahyuhw.mealrecipes.data.recipe.source.local
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.wahyuhw.mealrecipes.data.recipe.source.local.entity.RecipeDetailEntity
@@ -10,7 +11,7 @@ import com.wahyuhw.mealrecipes.data.recipe.source.local.entity.RecipeDetailEntit
 @Dao
 interface RecipeDao {
 	
-	@Insert
+	@Insert(onConflict = OnConflictStrategy.REPLACE)
 	fun insert(recipeDetailEntity: RecipeDetailEntity)
 	
 	@Update
