@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Meal Recipes</string>
+    <string name="label_error">Error</string>
+    <string name="action_retry">Retry</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_hello">Hello Fellas</string>
+    <string name="label_welcome_description">What are you cooking today?</string>
+    <string name="hint_search_recipe">Search recipe</string>
+    <string name="title_recipes_by_category">Recipes by Category</string>
+    <string name="title_recipes_by_area">Recipes by Area</string>
+    <string name="title_saved_recipes">Saved Recipes</string>
+    <string name="label_search_result">Search Result</string>
+    <string name="label_search_recipes">Search Recipes</string>
+    <string name="hint_search_saved_recipes">Search saved recipes</string>
+</resources>

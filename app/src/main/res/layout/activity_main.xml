@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_marginTop="@dimen/dimen_30dp"
+    android:layout_marginHorizontal="@dimen/dimen_30dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.activity.MainActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvHello"
+        style="@style/MealRecipeText.SemiBold.20"
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:text="@string/label_hello"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDescription"
+        style="@style/MealRecipeText.Regular.12"
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorGray"
+        app:layout_constraintTop_toBottomOf="@id/tvHello"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/dimen_6dp"
+        android:text="@string/label_welcome_description" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgBookmark"
+        android:layout_width="@dimen/dimen_54dp"
+        android:layout_height="@dimen/dimen_54dp"
+        android:src="@drawable/ic_bookmark"
+        android:background="?selectableItemBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilSearch"
+        style="@style/MealRecipeTextInputLayout"
+        android:enabled="false"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_marginTop="@dimen/dimen_30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDescription">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtSearch"
+            style="@style/MealRecipeText"
+            android:layout_width="match_parent"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="@dimen/dimen_8dp"
+            android:hint="@string/hint_search_recipe"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvArea"
+        style="@style/MealRecipeText.SemiBold.16"
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/title_recipes_by_area"
+        app:layout_constraintTop_toBottomOf="@id/tilSearch"
+        android:layout_marginTop="@dimen/dimen_32dp"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvArea"
+        android:background="@color/colorTransparent"
+        app:tabBackground="@drawable/selector_tab_background"
+        app:tabIndicatorColor="@color/colorTransparent"
+        app:tabInlineLabel="true"
+        app:tabMode="scrollable"
+        android:clipToPadding="false"
+        app:tabIconTint="@color/colorTransparent"
+        app:tabPaddingStart="@dimen/dimen_8dp"
+        app:tabPaddingEnd="@dimen/dimen_8dp"
+        app:tabTextAppearance="@style/MealRecipeText.SemiBold.12"
+        app:tabTextColor="@color/selector_tab_text_color"/>
+
+    <com.kennyc.view.MultiStateView
+        android:id="@+id/msvRecipeArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:msv_emptyView="@layout/layout_empty"
+        app:msv_loadingView="@layout/layout_loading_area"
+        app:msv_errorView="@layout/layout_empty"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        app:layout_constraintTop_toBottomOf="@id/tabArea">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRecipeByArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_recipe_area"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal" />
+    </com.kennyc.view.MultiStateView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCategory"
+        style="@style/MealRecipeText.SemiBold.16"
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/title_recipes_by_category"
+        app:layout_constraintTop_toBottomOf="@id/msvRecipeArea"
+        android:layout_marginTop="@dimen/dimen_20dp"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvCategory"
+        android:background="@color/colorTransparent"
+        app:tabBackground="@drawable/selector_tab_background"
+        app:tabIndicatorColor="@color/colorTransparent"
+        app:tabInlineLabel="true"
+        app:tabMode="scrollable"
+        android:clipToPadding="false"
+        app:tabIconTint="@color/colorTransparent"
+        app:tabPaddingStart="@dimen/dimen_8dp"
+        app:tabPaddingEnd="@dimen/dimen_8dp"
+        app:tabTextAppearance="@style/MealRecipeText.SemiBold.12"
+        app:tabTextColor="@color/selector_tab_text_color"/>
+
+    <com.kennyc.view.MultiStateView
+        android:id="@+id/msvRecipeCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:msv_emptyView="@layout/layout_empty"
+        app:msv_loadingView="@layout/layout_loading_category"
+        app:msv_errorView="@layout/layout_empty"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        app:layout_constraintTop_toBottomOf="@id/tabCategory">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRecipeByCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_recipe_category"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal" />
+    </com.kennyc.view.MultiStateView>
+</androidx.constraintlayout.widget.ConstraintLayout>
