@@ -1,56 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+<com.facebook.shimmer.ShimmerFrameLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.cardview.widget.CardView android:layout_width="@dimen/dimen_260dp"
-        android:layout_height="@dimen/dimen_96dp"
-        android:layout_marginEnd="@dimen/dimen_8dp"
-        android:layout_marginStart="@dimen/dimen_4dp"
-        android:layout_marginBottom="@dimen/dimen_4dp"
-        android:foreground="?selectableItemBackground"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:cardBackgroundColor="@color/colorShimmer"
-        app:cardCornerRadius="@dimen/dimen_12dp" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <androidx.cardview.widget.CardView android:layout_width="@dimen/dimen_260dp"
-        android:layout_height="@dimen/dimen_96dp"
-        android:layout_marginEnd="@dimen/dimen_8dp"
-        android:layout_marginStart="@dimen/dimen_4dp"
-        android:layout_marginBottom="@dimen/dimen_4dp"
-        android:foreground="?selectableItemBackground"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:cardBackgroundColor="@color/colorShimmer"
-        app:cardCornerRadius="@dimen/dimen_12dp" />
+        <androidx.cardview.widget.CardView android:layout_width="@dimen/dimen_260dp"
+            android:layout_height="@dimen/dimen_96dp"
+            android:layout_marginEnd="@dimen/dimen_8dp"
+            android:layout_marginStart="@dimen/dimen_4dp"
+            android:layout_marginBottom="@dimen/dimen_4dp"
+            android:foreground="?selectableItemBackground"
+            app:cardBackgroundColor="@color/colorShimmer"
+            app:cardCornerRadius="@dimen/dimen_12dp" />
 
-    <androidx.cardview.widget.CardView android:layout_width="@dimen/dimen_260dp"
-        android:layout_height="@dimen/dimen_96dp"
-        android:layout_marginEnd="@dimen/dimen_8dp"
-        android:layout_marginStart="@dimen/dimen_4dp"
-        android:layout_marginBottom="@dimen/dimen_4dp"
-        android:foreground="?selectableItemBackground"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:cardBackgroundColor="@color/colorShimmer"
-        app:cardCornerRadius="@dimen/dimen_12dp" />
+        <androidx.cardview.widget.CardView android:layout_width="@dimen/dimen_260dp"
+            android:layout_height="@dimen/dimen_96dp"
+            android:layout_marginEnd="@dimen/dimen_8dp"
+            android:layout_marginStart="@dimen/dimen_4dp"
+            android:layout_marginBottom="@dimen/dimen_4dp"
+            android:foreground="?selectableItemBackground"
+            app:cardBackgroundColor="@color/colorShimmer"
+            app:cardCornerRadius="@dimen/dimen_12dp" />
 
-    <androidx.cardview.widget.CardView android:layout_width="@dimen/dimen_260dp"
-        android:layout_height="@dimen/dimen_96dp"
-        android:layout_marginEnd="@dimen/dimen_8dp"
-        android:layout_marginStart="@dimen/dimen_4dp"
-        android:layout_marginBottom="@dimen/dimen_4dp"
-        android:foreground="?selectableItemBackground"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:cardBackgroundColor="@color/colorShimmer"
-        app:cardCornerRadius="@dimen/dimen_12dp" />
+        <androidx.cardview.widget.CardView android:layout_width="@dimen/dimen_260dp"
+            android:layout_height="@dimen/dimen_96dp"
+            android:layout_marginEnd="@dimen/dimen_8dp"
+            android:layout_marginStart="@dimen/dimen_4dp"
+            android:layout_marginBottom="@dimen/dimen_4dp"
+            android:foreground="?selectableItemBackground"
+            app:cardBackgroundColor="@color/colorShimmer"
+            app:cardCornerRadius="@dimen/dimen_12dp" />
 
-    <androidx.cardview.widget.CardView android:layout_width="@dimen/dimen_260dp"
-        android:layout_height="@dimen/dimen_96dp"
-        android:layout_marginEnd="@dimen/dimen_8dp"
-        android:layout_marginStart="@dimen/dimen_4dp"
-        android:layout_marginBottom="@dimen/dimen_4dp"
-        android:foreground="?selectableItemBackground"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:cardBackgroundColor="@color/colorShimmer"
-        app:cardCornerRadius="@dimen/dimen_12dp" />
-</LinearLayout>
+        <androidx.cardview.widget.CardView android:layout_width="@dimen/dimen_260dp"
+            android:layout_height="@dimen/dimen_96dp"
+            android:layout_marginEnd="@dimen/dimen_8dp"
+            android:layout_marginStart="@dimen/dimen_4dp"
+            android:layout_marginBottom="@dimen/dimen_4dp"
+            android:foreground="?selectableItemBackground"
+            app:cardBackgroundColor="@color/colorShimmer"
+            app:cardCornerRadius="@dimen/dimen_12dp" />
+
+        <androidx.cardview.widget.CardView android:layout_width="@dimen/dimen_260dp"
+            android:layout_height="@dimen/dimen_96dp"
+            android:layout_marginEnd="@dimen/dimen_8dp"
+            android:layout_marginStart="@dimen/dimen_4dp"
+            android:layout_marginBottom="@dimen/dimen_4dp"
+            android:foreground="?selectableItemBackground"
+            app:cardBackgroundColor="@color/colorShimmer"
+            app:cardCornerRadius="@dimen/dimen_12dp" />
+    </LinearLayout>
+</com.facebook.shimmer.ShimmerFrameLayout>

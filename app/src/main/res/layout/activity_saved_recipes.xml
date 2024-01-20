@@ -46,6 +46,7 @@
             android:layout_width="match_parent"
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="@dimen/dimen_8dp"
+            android:imeOptions="actionDone"
             android:hint="@string/hint_search_saved_recipes"
             android:inputType="textEmailAddress"
             android:maxLines="1" />

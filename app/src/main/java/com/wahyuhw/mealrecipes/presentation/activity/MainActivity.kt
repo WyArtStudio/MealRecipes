@@ -24,12 +24,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 	private val viewModel: RecipeViewModel by inject()
 	private var selectedArea: String = DEFAULT_AREA
 	private var selectedCategory: String = DEFAULT_CATEGORY
-	private val recipeAreaAdapter by lazy { RecipeAreaAdapter { recipeId ->
-		DetailRecipeActivity.start(this, id = recipeId)
+	private val recipeAreaAdapter by lazy { RecipeAreaAdapter { recipeId, recipeTitle ->
+		DetailRecipeActivity.start(this, id = recipeId, title = recipeTitle)
 	}}
 	
-	private val recipeCategoryAdapter by lazy { RecipeCategoryAdapter { recipeId ->
-		DetailRecipeActivity.start(this, id = recipeId)
+	private val recipeCategoryAdapter by lazy { RecipeCategoryAdapter { recipeId, recipeTitle ->
+		DetailRecipeActivity.start(this, id = recipeId, title = recipeTitle)
 	}}
 	
 	override fun getViewBinding(): ActivityMainBinding {

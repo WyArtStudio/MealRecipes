@@ -2,6 +2,7 @@ package com.wahyuhw.mealrecipes.presentation.activity
 
 import android.content.Context
 import android.content.Intent
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
@@ -13,6 +14,7 @@ import com.wahyuhw.mealrecipes.presentation.adapter.RecipeIngredient
 import com.wahyuhw.mealrecipes.presentation.adapter.RecipeIngredientsAdapter
 import com.wahyuhw.mealrecipes.utils.EXTRA_ID
 import com.wahyuhw.mealrecipes.utils.EXTRA_RECIPE
+import com.wahyuhw.mealrecipes.utils.EXTRA_TITLE
 import com.wahyuhw.mealrecipes.utils.debug
 import com.wahyuhw.mealrecipes.utils.emptyString
 import com.wahyuhw.mealrecipes.utils.getCompatDrawable
@@ -20,14 +22,16 @@ import com.wahyuhw.mealrecipes.utils.observe
 import com.wahyuhw.mealrecipes.utils.orDefault
 import com.wahyuhw.mealrecipes.utils.setHtmlText
 import com.wahyuhw.mealrecipes.utils.showToast
+import com.wahyuhw.mealrecipes.viewmodel.LocalViewModel
 import com.wahyuhw.mealrecipes.viewmodel.RecipeViewModel
 import org.koin.android.ext.android.inject
 
 class DetailRecipeActivity : BaseActivity<ActivityDetailRecipeBinding>() {
 	companion object {
-		fun start(context: Context, id: String = emptyString()) {
+		fun start(context: Context, id: String = emptyString(), title: String = emptyString()) {
 			val intent = Intent(context, DetailRecipeActivity::class.java)
 			intent.putExtra(EXTRA_ID, id)
+			intent.putExtra(EXTRA_TITLE, title)
 			context.startActivity(intent)
 		}
 	}
@@ -36,7 +40,9 @@ class DetailRecipeActivity : BaseActivity<ActivityDetailRecipeBinding>() {
 	private var isAlreadySaved = false
 	private var recipeDetail: RecipeDetail = RecipeDetail()
 	private var id = emptyString()
+	private var title = emptyString()
 	private val viewModel: RecipeViewModel by inject()
+	private val localViewModel: LocalViewModel by inject()
 	private val listIngredient: MutableList<RecipeIngredient> = mutableListOf()
 	
 	override fun getViewBinding(): ActivityDetailRecipeBinding {
@@ -45,21 +51,16 @@ class DetailRecipeActivity : BaseActivity<ActivityDetailRecipeBinding>() {
 	
 	override fun setupIntent() {
 		id = intent.getStringExtra(EXTRA_ID).orEmpty()
+		title = intent.getStringExtra(EXTRA_TITLE).orEmpty()
 	}
 	
 	override fun setupUI() {
 		binding.rvIngredient.adapter = recipeAdapter
+		checkBookmark(title)
 	}
 	
 	override fun setupAction() {
 		binding.imgBack.setOnClickListener { navigateBack() }
-		binding.imgBookmark.setOnClickListener {
-			if (isAlreadySaved) {
-				viewModel.removeLocalRecipe(recipeDetail)
-			} else {
-				viewModel.addLocalRecipe(recipeDetail)
-			}
-		}
 	}
 	
 	override fun setupProcess() {
@@ -78,54 +79,8 @@ class DetailRecipeActivity : BaseActivity<ActivityDetailRecipeBinding>() {
 			},
 			onSuccess = {
 				dismissLoading()
-				val recipeDetail = it?.firstOrNull().orDefault(RecipeDetail())
+				recipeDetail = it?.firstOrNull().orDefault(RecipeDetail())
 				loadRecipe(recipeDetail)
-			}
-		)
-		
-		viewModel.localRecipeDetailByIdResult.observe(this,
-			onLoading = {},
-			onError = {},
-			onSuccess = {
-				setBookmark(it.orDefault(RecipeDetail()).idMeal.isNotEmpty())
-				recipeDetail = it.orDefault(RecipeDetail())
-			}
-		)
-		
-		viewModel.addRecipeResult.observe(this,
-			onLoading = {
-				showLoading("Sedang menyimpan resep...")
-			},
-			onError = {
-				dismissLoading()
-				debug { "DB: $it" }
-				showErrorState("Error: $it")
-			},
-			onSuccess = {
-				dismissLoading()
-				if (it == true) {
-					showToast("Berhasil disimpan!")
-					binding.imgBookmark.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_bookmark_saved))
-					isAlreadySaved = true
-				} else showErrorState("Gagal menyimpan data!")
-			}
-		)
-		
-		viewModel.removeRecipeResult.observe(this,
-			onLoading = {
-				showLoading("Sedang menghapus resep...")
-			},
-			onError = {
-				dismissLoading()
-				showErrorState("Error: $it")
-			},
-			onSuccess = {
-				dismissLoading()
-				if (it == true) {
-					showToast("Berhasil menghapus!")
-					binding.imgBookmark.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_bookmark_unsaved))
-					isAlreadySaved = false
-				} else showErrorState("Gagal menghapus data!")
 			}
 		)
 	}
@@ -192,18 +147,30 @@ class DetailRecipeActivity : BaseActivity<ActivityDetailRecipeBinding>() {
 		}
 	}
 	
-	private fun setBookmark(isAlreadyBookmarked: Boolean) {
-		isAlreadySaved = isAlreadyBookmarked
-		binding.imgBookmark.setImageDrawable(getCompatDrawable(
-			if (isAlreadySaved) R.drawable.ic_bookmark_saved
-			else R.drawable.ic_bookmark_unsaved
-		))
+	private fun checkBookmark(recipeTitle: String) {
+		localViewModel.getLocalRecipeByTitle(recipeTitle)
+		localViewModel.localRecipe.observe(this) {
+			if (it != null) {
+				recipeDetail = it
+				isAlreadySaved = true
+				binding.imgBookmark.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_bookmark_saved))
+			} else {
+				isAlreadySaved = false
+				binding.imgBookmark.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_bookmark_unsaved))
+			}
+		}
 		
 		binding.imgBookmark.setOnClickListener {
 			if (isAlreadySaved) {
-				viewModel.removeLocalRecipe(recipeDetail)
+				localViewModel.removeRecipe(recipeDetail)
+				showToast("Berhasil dihapus dari bookmark!")
+				binding.imgBookmark.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_bookmark_unsaved))
+				isAlreadySaved = false
 			} else {
 				viewModel.addLocalRecipe(recipeDetail)
+				showToast("Berhasil ditambahkan ke bookmark!")
+				binding.imgBookmark.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_bookmark_saved))
+				isAlreadySaved = true
 			}
 		}
 	}

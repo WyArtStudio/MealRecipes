@@ -18,6 +18,7 @@ import com.wahyuhw.mealrecipes.data.util.HeaderInterceptor
 import com.wahyuhw.mealrecipes.domain.recipe.RecipeInteractor
 import com.wahyuhw.mealrecipes.domain.recipe.RecipeUseCase
 import com.wahyuhw.mealrecipes.utils.BASE_URL
+import com.wahyuhw.mealrecipes.viewmodel.LocalViewModel
 import com.wahyuhw.mealrecipes.viewmodel.RecipeViewModel
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -88,6 +89,7 @@ val useCaseModule = module {
 
 val viewModelModule = module {
 	viewModel { RecipeViewModel(get(), get()) }
+	viewModel { LocalViewModel(get()) }
 }
 
 val dbModule = module {

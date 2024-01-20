@@ -12,7 +12,7 @@ import com.wahyuhw.mealrecipes.utils.diffutil.DiffUtilRecipeItem
 import com.wahyuhw.mealrecipes.utils.loadImageUrl
 
 class RecipeAreaAdapter(
-	private val onClickListener: (String) -> Unit,
+	private val onClickListener: (String, String) -> Unit,
 ) : BaseAdapter<RecipeItem, ItemRecipeAreaBinding, RecipeAreaAdapter.RecipeItemVH>(
 	DiffUtilRecipeItem()
 ) {
@@ -28,7 +28,7 @@ class RecipeAreaAdapter(
 	            tvTitle.text = data.strMeal
 				
                 root.setOnClickListener {
-                    onClickListener.invoke(data.idMeal)
+                    onClickListener.invoke(data.idMeal, data.strMeal)
                 }
             }
 
