@@ -20,7 +20,10 @@ A few things you can do with Meal Recipes:
 - Run in Android
 
 ## <a name="screenshot"></a> 📸 Screenshot
-
+<img src='https://github.com/WyArtStudio/MealRecipes/blob/master/ss_meal%201.jpeg' width='200'>
+<img src='https://github.com/WyArtStudio/MealRecipes/blob/master/ss_meal%202.jpeg' width='200'>
+<img src='https://github.com/WyArtStudio/MealRecipes/blob/master/ss_meal%203.jpeg' width='200'>
+<img src='https://github.com/WyArtStudio/MealRecipes/blob/master/ss%20meal%204.jpeg' width='200'>
 
 ## <a name="libraries"></a> 💡 Libraries
 
