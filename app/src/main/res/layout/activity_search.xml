@@ -63,6 +63,7 @@
         app:layout_constraintStart_toStartOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvResultItem"
         style="@style/MealRecipeText.Regular.12"
         android:layout_width="wrap_content"
         android:textColor="@color/colorGray"

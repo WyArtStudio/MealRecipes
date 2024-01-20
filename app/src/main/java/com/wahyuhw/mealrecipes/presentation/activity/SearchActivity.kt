@@ -69,6 +69,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 			},
 			onSuccess = {
 				if (it?.isNotEmpty() == true) {
+					binding.tvResultItem.text = "${it.size} results"
 					recipeAdapter.submitList(it)
 					binding.msvSearch.showContent()
 				} else
