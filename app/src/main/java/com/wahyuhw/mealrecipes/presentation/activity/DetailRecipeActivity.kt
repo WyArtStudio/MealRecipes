@@ -53,6 +53,13 @@ class DetailRecipeActivity : BaseActivity<ActivityDetailRecipeBinding>() {
 	
 	override fun setupAction() {
 		binding.imgBack.setOnClickListener { navigateBack() }
+		binding.imgBookmark.setOnClickListener {
+			if (isAlreadySaved) {
+				viewModel.removeLocalRecipe(recipeDetail)
+			} else {
+				viewModel.addLocalRecipe(recipeDetail)
+			}
+		}
 	}
 	
 	override fun setupProcess() {

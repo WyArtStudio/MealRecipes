@@ -125,7 +125,7 @@ fun RecipeDetailResponse.toDomain(): RecipeDetail {
 
 fun RecipeDetail.toEntity(): RecipeDetailEntity {
 	return RecipeDetailEntity(
-		idMeal = idMeal.toInt(),
+		idMeal = idMeal,
 		strMeal = strMeal,
 		strDrinkAlternate = strDrinkAlternate,
 		strCategory = strCategory,
