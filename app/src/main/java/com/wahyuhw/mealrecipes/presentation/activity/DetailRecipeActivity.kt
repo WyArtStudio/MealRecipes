@@ -97,10 +97,12 @@ class DetailRecipeActivity : BaseActivity<ActivityDetailRecipeBinding>() {
 				showLoading("Sedang menyimpan resep...")
 			},
 			onError = {
+				dismissLoading()
 				debug { "DB: $it" }
 				showErrorState("Error: $it")
 			},
 			onSuccess = {
+				dismissLoading()
 				if (it == true) {
 					showToast("Berhasil disimpan!")
 					binding.imgBookmark.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_bookmark_saved))
@@ -114,9 +116,11 @@ class DetailRecipeActivity : BaseActivity<ActivityDetailRecipeBinding>() {
 				showLoading("Sedang menghapus resep...")
 			},
 			onError = {
+				dismissLoading()
 				showErrorState("Error: $it")
 			},
 			onSuccess = {
+				dismissLoading()
 				if (it == true) {
 					showToast("Berhasil menghapus!")
 					binding.imgBookmark.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_bookmark_unsaved))

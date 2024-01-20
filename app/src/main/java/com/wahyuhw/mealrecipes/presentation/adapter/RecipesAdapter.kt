@@ -18,7 +18,7 @@ class RecipesAdapter(
         override fun bind(data: RecipeDetail) {
             with(binding) {
                 imgRecipe.loadImageUrl(
-                    imgUrl = data.strImageSource,
+                    imgUrl = data.strMealThumb,
                     imgPlaceHolder = R.drawable.img_sample_recipe
                 )
                 

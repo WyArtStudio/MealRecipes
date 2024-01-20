@@ -48,7 +48,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 	override fun setupAction() {
 		binding.imgBookmark.setOnClickListener { SavedRecipesActivity.start(this) }
 		
-		binding.tilSearch.setOnClickListener { SearchActivity.start(this) }
+		binding.edtSearch.setOnClickListener { SearchActivity.start(this) }
 		
 		binding.tabCategory.onTabPositionSelected { category: String ->
 			selectedCategory = category
